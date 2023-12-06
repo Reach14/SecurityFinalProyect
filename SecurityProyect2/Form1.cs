@@ -9,7 +9,6 @@ namespace SecurityProyect2
     {
         private MaskedTextBox tb_num_tarjeta = new MaskedTextBox();
         private String tarjeta_numnero;
-        private String key = "Rodriguez2008$SecurityPassword@0";
         public Form1()
         {
             InitializeComponent();
@@ -23,7 +22,7 @@ namespace SecurityProyect2
         //Metodo para validar número de tarjeta por medio de una regExp
         private Boolean valida_tarjeta(String numTarjeta) {
             String regex = @"^(\d\s?){15,16}$";
-            return Regex.IsMatch(numTarjeta, regex, RegexOptions.NonBacktracking, TimeSpan.FromMilliseconds(100));
+            return Regex.IsMatch(numTarjeta, regex, RegexOptions.None, TimeSpan.FromMilliseconds(100));
         }
 
         // Método para enmascarar numero de tarjeta, visible solo los ultimos 4 digitos
