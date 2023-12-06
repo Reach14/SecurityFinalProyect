@@ -16,9 +16,11 @@ namespace SecurityProyect2
 
         private void label2_Click(object sender, EventArgs e)
         {
+            throw new NotSupportedException();
+
 
         }
-        
+
         //Metodo para validar número de tarjeta por medio de una regExp
         private Boolean valida_tarjeta(String numTarjeta) {
             String regex = @"^(\d\s?){15,16}$";
@@ -73,11 +75,15 @@ namespace SecurityProyect2
 
         private void label2_Click_1(object sender, EventArgs e)
         {
+            throw new NotSupportedException();
+
 
         }
 
         private void label3_Click(object sender, EventArgs e)
         {
+            throw new NotSupportedException();
+
 
         }
 
