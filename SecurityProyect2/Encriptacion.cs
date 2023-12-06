@@ -8,10 +8,9 @@ using System.Text;
 namespace SecurityProyect2
 {
     internal class Encriptacion{
-        private String key;
-        public Encriptacion(String key) {
-            this.key = key;
-        }
+       private readonly byte[] key = new byte[32];
+       private readonly byte[] iv = new byte[16];
+
         private static string hashinSHA256(string dato)
         {
             // Create a SHA256 hash from string   
@@ -29,56 +28,47 @@ namespace SecurityProyect2
                 return stringbuilder.ToString();
             }
         }
-        private static string encryptAES256(string key, string plainText)
+        private static byte[] Encrypt(string plaintext, byte[] key, byte[] iv)
         {
-            byte[] iv = new byte[16];
-            byte[] array;
-
-            using (Aes aes = Aes.Create())
+            using (Aes aesAlg = Aes.Create())
             {
-                aes.Key = Encoding.ASCII.GetBytes(key);
-                aes.IV = iv;
-
-                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
-
-                using (MemoryStream memoryStream = new MemoryStream())
+                aesAlg.Key = key;
+                aesAlg.IV = iv;
+                ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
+                byte[] encryptedBytes;
+                using (var msEncrypt = new System.IO.MemoryStream())
                 {
-                    using (CryptoStream cryptoStream = new CryptoStream((Stream)memoryStream, encryptor, CryptoStreamMode.Write))
+                    using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
                     {
-                        using (StreamWriter streamWriter = new StreamWriter((Stream)cryptoStream))
-                        {
-                            streamWriter.Write(plainText);
-                        }
-
-                        array = memoryStream.ToArray();
+                        byte[] plainBytes = Encoding.UTF8.GetBytes(plaintext);
+                        csEncrypt.Write(plainBytes, 0, plainBytes.Length);
                     }
+                    encryptedBytes = msEncrypt.ToArray();
                 }
+                return encryptedBytes;
             }
-
-            return Convert.ToBase64String(array);
         }
 
-        private static string decryptAES256(string key, string cipherText)
+        public static string Decrypt(byte[] ciphertext, byte[] key, byte[] iv)
         {
-            byte[] iv = new byte[16];
-            byte[] buffer = Convert.FromBase64String(cipherText);
-
-            using (Aes aes = Aes.Create())
+            using (Aes aesAlg = Aes.Create())
             {
-                aes.Key = Encoding.ASCII.GetBytes(key);
-                aes.IV = iv;
-                ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
-
-                using (MemoryStream memoryStream = new MemoryStream(buffer))
+                aesAlg.Key = key;
+                aesAlg.IV = iv;
+                ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
+                byte[] decryptedBytes;
+                using (var msDecrypt = new System.IO.MemoryStream(ciphertext))
                 {
-                    using (CryptoStream cryptoStream = new CryptoStream((Stream)memoryStream, decryptor, CryptoStreamMode.Read))
+                    using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
                     {
-                        using (StreamReader streamReader = new StreamReader((Stream)cryptoStream))
+                        using (var msPlain = new System.IO.MemoryStream())
                         {
-                           return streamReader.ReadToEnd();
+                            csDecrypt.CopyTo(msPlain);
+                            decryptedBytes = msPlain.ToArray();
                         }
                     }
                 }
+                return Encoding.UTF8.GetString(decryptedBytes);
             }
         }
 
@@ -88,12 +78,14 @@ namespace SecurityProyect2
         }
 
         public string getAES256Encript(string dato) {
-            return encryptAES256(this.key, dato);
+            string encryptedText = Convert.ToBase64String(Encrypt(dato, this.key, this.iv));
+            return encryptedText;
         }
 
-        public string getAES256desEncript(string dato)
-        {
-            return decryptAES256(this.key, dato);
+        public string getAES256desEncript(string dato){
+            byte[] bytes = Convert.FromBase64String(dato);
+            string decryptedText = Decrypt(bytes, key, iv);
+            return decryptedText;
         }
 
     }

@@ -18,3 +18,13 @@ C:\GIT\entregable02\SecurityProyect2\obj\Debug\SecurityProyect2.csproj.GenerateR
 C:\GIT\entregable02\SecurityProyect2\obj\Debug\SecurityProyect2.csproj.CoreCompileInputs.cache
 C:\GIT\entregable02\SecurityProyect2\obj\Debug\SecurityProyect2.exe
 C:\GIT\entregable02\SecurityProyect2\obj\Debug\SecurityProyect2.pdb
+C:\GIT\SecurityFinalProyect\SecurityProyect2\bin\Debug\SecurityProyect2.exe.config
+C:\GIT\SecurityFinalProyect\SecurityProyect2\bin\Debug\SecurityProyect2.exe
+C:\GIT\SecurityFinalProyect\SecurityProyect2\bin\Debug\SecurityProyect2.pdb
+C:\GIT\SecurityFinalProyect\SecurityProyect2\obj\Debug\SecurityProyect2.csproj.AssemblyReference.cache
+C:\GIT\SecurityFinalProyect\SecurityProyect2\obj\Debug\SecurityProyect2.Form1.resources
+C:\GIT\SecurityFinalProyect\SecurityProyect2\obj\Debug\SecurityProyect2.Properties.Resources.resources
+C:\GIT\SecurityFinalProyect\SecurityProyect2\obj\Debug\SecurityProyect2.csproj.GenerateResource.cache
+C:\GIT\SecurityFinalProyect\SecurityProyect2\obj\Debug\SecurityProyect2.csproj.CoreCompileInputs.cache
+C:\GIT\SecurityFinalProyect\SecurityProyect2\obj\Debug\SecurityProyect2.exe
+C:\GIT\SecurityFinalProyect\SecurityProyect2\obj\Debug\SecurityProyect2.pdb

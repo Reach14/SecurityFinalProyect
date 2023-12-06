@@ -40,7 +40,7 @@ namespace SecurityProyect2
         private void button1_Click(object sender, EventArgs e)
         {   
             //Declaramos clase de enpriptación
-            Encriptacion encriptacion = new Encriptacion(this.key);
+            Encriptacion encriptacion = new Encriptacion();
             
             //Verificamos si es un numero de tarjeta valido entre 15 y 16 digitos.
             if (valida_tarjeta(this.tb_num_tarjeta.Text.ToString()))
