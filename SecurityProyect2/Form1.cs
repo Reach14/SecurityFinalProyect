@@ -23,7 +23,7 @@ namespace SecurityProyect2
         //Metodo para validar número de tarjeta por medio de una regExp
         private Boolean valida_tarjeta(String numTarjeta) {
             String regex = @"^(\d\s?){15,16}$";
-            return Regex.IsMatch(numTarjeta, regex);
+            return Regex.IsMatch(numTarjeta, regex, RegexOptions.NonBacktracking, TimeSpan.FromMilliseconds(100));
         }
 
         // Método para enmascarar numero de tarjeta, visible solo los ultimos 4 digitos
