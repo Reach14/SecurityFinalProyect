@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -29,12 +30,15 @@ namespace SecurityProyect2
 
         // Método para enmascarar numero de tarjeta, visible solo los ultimos 4 digitos
         private String mask_tarjeta(String numTarjeta) {
-            String mascara = "";
+            StringBuilder bld = new StringBuilder();
+
             for (int i = 0; i < numTarjeta.Length -4;i++) {
-                mascara += "*";
+                bld.Append("*");
             }
-            mascara += numTarjeta.Substring((numTarjeta.Length)-4);
-            return mascara;
+
+            bld.Append((numTarjeta.Length) - 4);
+
+            return bld.ToString(); ;
         }
 
         //Metodo para procesar información
