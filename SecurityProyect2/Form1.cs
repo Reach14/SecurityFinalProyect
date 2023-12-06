@@ -38,7 +38,7 @@ namespace SecurityProyect2
 
             bld.Append((numTarjeta.Length) - 4);
 
-            return bld.ToString(); ;
+            return bld.ToString();
         }
 
         //Metodo para procesar información
