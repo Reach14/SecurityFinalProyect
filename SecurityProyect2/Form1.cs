@@ -36,9 +36,22 @@ namespace SecurityProyect2
                 bld.Append("*");
             }
 
-            bld.Append((numTarjeta.Length) - 4);
+            bld.Append(numTarjeta.Substring(numTarjeta.Length - 4).ToString());
 
             return bld.ToString();
+        }
+       
+        //Metodo para comparar cadenas 
+        private Boolean comprarSHA256(String p_cadena1, String p_cadena2)
+        {
+            Boolean comparacion = false;
+
+            if (p_cadena1.Equals(p_cadena2))
+            {
+                comparacion = true;
+            }
+
+            return comparacion;
         }
 
         //Metodo para procesar información
@@ -68,7 +81,15 @@ namespace SecurityProyect2
                 var decryptedString = encriptacion.getAES256desEncript(encryptedString);
                 this.tb_sha256_des.Text = decryptedString.ToString();
 
-
+                //Comparamos cadenas
+                if (comprarSHA256(this.tbo_sha256.Text, this.tb_sha256_des.Text))
+                {
+                    MessageBox.Show("Las cadenas coinciden\nOrigina : \n" + this.tbo_sha256.Text + "\n\nDesencriptado:\n" + this.tb_sha256_des.Text, "Comparación de cadenas SHA256", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Ocurrió un problema en la desencriptación las cadenas no coinciden", "Comparación de cadenas SHA256", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             else
             {
